@@ -14,6 +14,9 @@ public class Order {
     }
 
     public void addItem(Product prod, int quantity) {
+        if (quantity > prod.getStock()) {
+            throw new StockNotAvailableException("The requested quantity exceeds the available stock.");
+        }
         items.add(new OrderItem(prod, quantity));
         prod.cutStock(quantity);
     }
